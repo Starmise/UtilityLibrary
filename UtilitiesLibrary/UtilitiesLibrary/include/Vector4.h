@@ -1,57 +1,54 @@
 #pragma once
 #include "MathUtilities.h"
 
-class Vector3
+class Vector4
 {
 public:
   float x; // Valor en x del vector
   float y; // Valor en y del vector
   float z; // Valor en z del vector
+  float w; // Valor en w del vector
 
   /**
-    * @brief Constructor por defecto que inicializa los valores "x", "y" y "z" en 0
+    * @brief Constructor por defecto que inicializa los valores "x", "y", "z", "w" en 0
     */
-  Vector3() : x(0), y(0), z(0) {};
-
+  Vector4() : x(0), y(0), z(0), w(0) {};
   /**
-    * @brief Constructor con parámetros para los valores "x", "y" y "z"
+    * @brief Constructor con parámetros para los valores "x", "y", "z" y "w"
     */
-  Vector3(float xNum, float yNum, float zNum) : x(xNum), y(yNum), z(zNum) {}
+  Vector4(float xNum, float yNum, float zNum, float wNum) :
+    x(xNum), y(yNum), z(zNum), w(wNum) {}
 
   /**
     * @brief Destructor por defecto
     */
-  ~Vector3() = default;
+  ~Vector4() = default;
 
   /**
      * @brief Sobrecarga del operador +, para sumar un vector a otro vector.
      * @param other El otro vector que se sumará.
      */
-  Vector3
-    operator+(const Vector3& other) const {
-    float new_xNum = x + other.x;
-    float new_yNum = y + other.y;
-    float new_zNum = z + other.z;
-    return Vector3(new_xNum, new_yNum, new_zNum);
+  Vector4
+    operator+(const Vector4& other) const {
+    return Vector4(x + other.x, y + other.y, z + other.z, w + other.w);
   }
 
   /**
      * @brief Sobrecarga del operador -, para restar un vector a otro vector.
-     * Se optimiza realizando ahora las operaciones dentro del return.
      * @param other El otro vector que se restará.
      */
-  Vector3
-    operator-(const Vector3& other) const {
-    return Vector3(x - other.x, y - other.y, z - other.z);
+  Vector4
+    operator-(const Vector4& other) const {
+    return Vector4(x - other.x, y - other.y, z - other.z, w + other.w);
   }
 
   /**
      * @brief Sobrecarga del operador *, para multiplicar un vector a otro vector.
      * @param other El otro vector que se multiplicará.
      */
-  Vector3
+  Vector4
     operator*(float scalar) const {
-    return Vector3(x * scalar, y * scalar, z * scalar);
+    return Vector4(x * scalar, y - scalar, z - scalar, w + scalar);
   }
 
   /**
@@ -59,20 +56,19 @@ public:
     */
   float
     magnitude() {
-    return sqrt(x * x + y * y + z * z);
+    return sqrt(x * x + y * y + z * z + w * w);
   }
 
   /**
      * @brief Normalización del vector que devuelva un vector con la misma dirección
      */
-  Vector3
+  Vector4
     normalize() {
     float mag = magnitude();
-    // Si la magnitud es 0, se devuelve un vector con las coordenadas (0,0,0)
     if (mag == 0) {
-      return Vector3(0, 0, 0);
+      return Vector4(0, 0, 0, 0);
     }
-    return Vector3(x / mag, y / mag, z / mag);
+    return Vector4(x / mag, y / mag, z / mag, w / mag);
   }
 
   /**
