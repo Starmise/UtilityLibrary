@@ -57,7 +57,7 @@ public:
 
   /**
      * @brief Sobrecarga del operador *, para multiplicar un vector a otro vector.
-     * @param other El otro vector que se multiplicará.
+     * @param scalar El producto escalar por el que se multiplicará.
      */
   Vector2
   operator*(float scalar) const {

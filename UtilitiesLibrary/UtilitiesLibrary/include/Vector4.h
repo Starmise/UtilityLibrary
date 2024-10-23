@@ -13,6 +13,7 @@ public:
     * @brief Constructor por defecto que inicializa los valores "x", "y", "z", "w" en 0
     */
   Vector4() : x(0), y(0), z(0), w(0) {};
+
   /**
     * @brief Constructor con parámetros para los valores "x", "y", "z" y "w"
     */
@@ -44,11 +45,11 @@ public:
 
   /**
      * @brief Sobrecarga del operador *, para multiplicar un vector a otro vector.
-     * @param other El otro vector que se multiplicará.
+     * @param scalar El producto escalar por el que se multiplicará.
      */
   Vector4
     operator*(float scalar) const {
-    return Vector4(x * scalar, y - scalar, z - scalar, w + scalar);
+    return Vector4(x * scalar, y * scalar, z * scalar, w * scalar);
   }
 
   /**
