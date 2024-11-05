@@ -4,67 +4,67 @@
 class Vector4
 {
 public:
-  float x; // Valor en x del vector
-  float y; // Valor en y del vector
-  float z; // Valor en z del vector
-  float w; // Valor en w del vector
+  float x; // X value of the vector
+  float y; // Y value of the vector
+  float z; // Z value of the vector
+  float w; // W value of the vector
 
   /**
-    * @brief Constructor por defecto que inicializa los valores "x", "y", "z", "w" en 0
+    * @brief  Default constructor that initializes "x", "y", "z", and "w" to 0
     */
   Vector4() : x(0), y(0), z(0), w(0) {};
 
   /**
-    * @brief Constructor con parámetros para los valores "x", "y", "z" y "w"
+    * @brief Constructor with parameters for "x", "y", "z", and "w" values
     */
   Vector4(float xNum, float yNum, float zNum, float wNum) :
     x(xNum), y(yNum), z(zNum), w(wNum) {}
 
   /**
-    * @brief Destructor por defecto
+    * @brief Default destructor
     */
   ~Vector4() = default;
 
   /**
-     * @brief Sobrecarga del operador +, para sumar un vector a otro vector.
-     * @param other El otro vector que se sumará.
+     * @brief Overload of the + operator, to add one vector to another vector.
+     * @param other The other vector to add.
      */
   Vector4
-    operator+(const Vector4& other) const {
+  operator+(const Vector4& other) const {
     return Vector4(x + other.x, y + other.y, z + other.z, w + other.w);
   }
 
   /**
-     * @brief Sobrecarga del operador -, para restar un vector a otro vector.
-     * @param other El otro vector que se restará.
+     * @brief Overload of the - operator, to subtract one vector from another vector.
+     * @param other The other vector to subtract.
      */
   Vector4
-    operator-(const Vector4& other) const {
+  operator-(const Vector4& other) const {
     return Vector4(x - other.x, y - other.y, z - other.z, w + other.w);
   }
 
   /**
-     * @brief Sobrecarga del operador *, para multiplicar un vector a otro vector.
-     * @param scalar El producto escalar por el que se multiplicará.
+     * @brief Overload of the * operator, to multiply a vector by a scalar.
+     * @param scalar The scalar by which to multiply.
      */
   Vector4
-    operator*(float scalar) const {
+  operator*(float scalar) const {
     return Vector4(x * scalar, y * scalar, z * scalar, w * scalar);
   }
 
   /**
-    * @brief Se cacula la magnitud de los valores del vector
+    * @brief Calculates the magnitude of the vector values
     */
   float
-    magnitude() {
+  magnitude() {
     return sqrt(x * x + y * y + z * z + w * w);
   }
 
   /**
-     * @brief Normalización del vector que devuelva un vector con la misma dirección
+     * @brief Normalizes the vector, returning a vector with the same direction
      */
   Vector4
-    normalize() {
+  normalize() {
     float mag = magnitude();
     if (mag == 0) {
       return Vector4(0, 0, 0, 0);
@@ -73,18 +73,18 @@ public:
   }
 
   /**
-    * @brief Método que devuelve un puntero a los componentes del vector
+    * @brief Method that returns a pointer to the vector components
     */
   float*
-    data() {
+  data() {
     return &x;
   }
 
   /**
-    * @brief Método constante con un puntero a los componentes del vector sin modificarlos
+    * @brief Const method that returns a pointer to the vector components without modifying them
     */
   const float*
-    data() const {
+  data() const {
     return &x;
   }
 

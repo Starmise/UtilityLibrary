@@ -4,31 +4,31 @@
 class Vector3
 {
 public:
-  float x; // Valor en x del vector
-  float y; // Valor en y del vector
-  float z; // Valor en z del vector
+  float x; // X value of the vector
+  float y; // Y value of the vector
+  float z; // Z value of the vector
 
   /**
-    * @brief Constructor por defecto que inicializa los valores "x", "y" y "z" en 0
+    * @brief Default constructor that initializes "x", "y", and "z" to 0
     */
   Vector3() : x(0), y(0), z(0) {};
 
   /**
-    * @brief Constructor con parámetros para los valores "x", "y" y "z"
+    * @brief Constructor with parameters for "x", "y", and "z" values
     */
   Vector3(float xNum, float yNum, float zNum) : x(xNum), y(yNum), z(zNum) {}
 
   /**
-    * @brief Destructor por defecto
+    * @brief Default destructor
     */
   ~Vector3() = default;
 
   /**
-     * @brief Sobrecarga del operador +, para sumar un vector a otro vector.
-     * @param other El otro vector que se sumará.
+     * @brief Overload of the + operator, to add one vector to another vector.
+     * @param other The other vector to add.
      */
   Vector3
-    operator+(const Vector3& other) const {
+  operator+(const Vector3& other) const {
     float new_xNum = x + other.x;
     float new_yNum = y + other.y;
     float new_zNum = z + other.z;
@@ -36,39 +36,39 @@ public:
   }
 
   /**
-     * @brief Sobrecarga del operador -, para restar un vector a otro vector.
-     * Se optimiza realizando ahora las operaciones dentro del return.
-     * @param other El otro vector que se restará.
+     * @brief Overload of the - operator, to subtract one vector from another vector.
+     * Optimized by doing operations directly in the return statement.
+     * @param other The other vector to subtract.
      */
   Vector3
-    operator-(const Vector3& other) const {
+  operator-(const Vector3& other) const {
     return Vector3(x - other.x, y - other.y, z - other.z);
   }
 
   /**
-     * @brief Sobrecarga del operador *, para multiplicar un vector a otro vector.
-     * @param scalar El producto escalar por el que se multiplicará.
+     * @brief Overload of the * operator, to multiply a vector by a scalar.
+     * @param scalar The scalar by which to multiply.
      */
   Vector3
-    operator*(float scalar) const {
+  operator*(float scalar) const {
     return Vector3(x * scalar, y * scalar, z * scalar);
   }
 
   /**
-    * @brief Se cacula la magnitud de los valores del vector
+    * @brief Calculates the magnitude of the vector values
     */
   float
-    magnitude() {
+  magnitude() {
     return sqrt(x * x + y * y + z * z);
   }
 
   /**
-     * @brief Normalización del vector que devuelva un vector con la misma dirección
+     * @brief Normalizes the vector, returning a vector with the same direction
      */
   Vector3
-    normalize() {
+  normalize() {
     float mag = magnitude();
-    // Si la magnitud es 0, se devuelve un vector con las coordenadas (0,0,0)
+    // If the magnitude is 0, a vector with coordinates (0,0,0) is returned
     if (mag == 0) {
       return Vector3(0, 0, 0);
     }
@@ -76,18 +76,17 @@ public:
   }
 
   /**
-    * @brief Método que devuelve un puntero a los componentes del vector
-    */
+    * @brief Method that returns a pointer to the vector components
   float*
-    data() {
+  data() {
     return &x;
   }
 
   /**
-    * @brief Método constante con un puntero a los componentes del vector sin modificarlos
+    * @brief Const method that returns a pointer to the vector components without modifying them
     */
   const float*
-    data() const {
+  data() const {
     return &x;
   }
 

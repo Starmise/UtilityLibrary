@@ -5,63 +5,64 @@
 class Quaternion
 {
 public:
-  float w; // Valor en w del quaternion
-  float x; // Valor en x del quaternion
-  float y; // Valor en y del quaternion
-  float z; // Valor en z del quaternion
+  float w; // W value of the quaternion
+  float x; // X value of the quaternion
+  float y; // Y value of the quaternion
+  float z; // Z value of the quaternion
 
   /**
-    * @brief Constructor por defecto que inicializa los valores "w", "x", "y", "z" en 0
+    * @brief Default constructor that initializes "w", "x", "y", and "z" to 0
     */
   Quaternion() : w(0), x(0), y(0), z(0) {};
 
   /**
-    * @brief Constructor con parámetros para los valores "x", "y", "z" y "w"
+    * @brief Constructor with parameters for "w", "x", "y", and "z" values
     */
   Quaternion(float wNum, float xNum, float yNum, float zNum) :
     w(wNum), x(xNum), y(yNum), z(zNum) {}
 
   /**
-    * @brief Constructor que inicializa el quaternion a partir de un ángulo y eje de rotación.
-    * @param angle Ángulo de rotación del quaternion.
-    * @param axis Eje de rotación como un Vector3
+    * @brief Constructor that initializes the quaternion from an angle and a rotation axis.
+    * @param angle Rotation angle of the quaternion.
+    * @param axis Rotation axis as a Vector3
     */
-  Quaternion
-    fromAxisAngle(const Vector3& axis, float angle) {
+  static Quaternion
+  fromAxisAngle(const Vector3& axis, float angle) {
     float halfAngle = angle / 2;
     float sinHalfAngle = sin(halfAngle);
 
-    w = cos(halfAngle);
-    x = axis.x * sinHalfAngle;
-    y = axis.y * sinHalfAngle;
-    z = axis.z * sinHalfAngle;
+    float w = cos(halfAngle);
+    float x = axis.x * sinHalfAngle;
+    float y = axis.y * sinHalfAngle;
+    float z = axis.z * sinHalfAngle;
 
     return Quaternion(w, x, y, z);
   }
 
   /**
-     * @brief Sobrecarga del operador +, para sumar un cuaternión a otro cuaternión.
-     * @param other El otro cuaternion que se sumará.
+     * @brief Overload of the + operator, to add one quaternion to another quaternion.
+     * @param other The other quaternion to add.
      */
   Quaternion
-    operator+(const Quaternion& other) const {
+  operator+(const Quaternion& other) const {
     return Quaternion(w + other.w, x + other.x, y + other.y, z + other.z);
   }
 
   /**
-     * @brief Sobrecarga del operador *, para multiplicar un cuaternión por un escalar
-     * @param scalar El producto escalar por el que se multiplicará.
+     * @brief Overload of the * operator, to multiply a quaternion by a scalar.
+     * @param scalar The scalar by which to multiply.
      */
   Quaternion
-    operator*(float scalar) const {
+  operator*(float scalar) const {
     return Quaternion(w * scalar, x * scalar, y - scalar, z - scalar);
   }
 
   /**
-     * @brief Sobrecarga del operador *, para multiplicar un cuaternión a otro cuaternión.
-     * @param other El otro cuaternion que se multiplicará.
+     * @brief Overload of the * operator, to multiply a quaternion to another quaternion.
+     * @param other The other quaternion to multiply.
      */
-  Quaternion operator*(const Quaternion& other) const {
+  Quaternion 
+  operator*(const Quaternion& other) const {
     return Quaternion(
       w * other.w - x * other.x - y * other.y - z * other.z,
       w * other.x + x * other.w + y * other.z - z * other.y,
@@ -70,18 +71,18 @@ public:
   }
 
   /**
-    * @brief Se cacula la magnitud de los valores del cuaternión
+    * @brief Calculates the magnitude of the quaternion values
     */
   float
-    magnitude() const {
+  magnitude() const {
     return sqrt(w * w + x * x + y * y + z * z);
   }
 
   /**
-     * @brief Normalización que devuelve un cuaternión normalizado de magnitud 1
+     * @brief Normalization returning a normalized quaternion of magnitude 1
      */
   Quaternion
-    normalize() {
+  normalize() {
     float mag = magnitude();
     if (mag == 0) {
       return Quaternion(1, 0, 0, 0);
@@ -90,30 +91,30 @@ public:
   }
 
   /**
-     * @brief Devuelve el conjugado del cuaternión.
+     * @brief Returns the conjugate of the quaternion.
      */
   Quaternion
-    conjugate() {
+  conjugate() {
     return Quaternion(w, -x, -y, -z);
   }
 
   /**
-     * @brief Devuelve el cuaternión inverso.
+     * @brief Returns the inverse of the quaternion.
      */
   Quaternion
-    inverse() {
+  inverse() {
     float qSquared = (1.0f / (w * w + x * x + y * y + z * z));
     return conjugate() * qSquared;
   }
 
 
   /**
-     * @brief Método Vector3 que utiliza el cuaternión para rotar un vector v.
-     * Se convierte el vector en un cuaternión, luego se normaliza y se rota
-     * usando q * v * q^-1
+     * @brief Vector3 method that uses the quaternion to rotate a vector v.
+     * Converts the vector into a quaternion, then normalizes and rotates it
+     * using q * v * q^-1
      */
   Vector3
-    rotate(const Vector3& v) {
+  rotate(const Vector3& v) {
     Quaternion vectorQuat(0, v.x, v.y, v.z);
 
     Quaternion normalizedQuat = this->normalize();
@@ -125,18 +126,18 @@ public:
 
 
   /**
-    * @brief Método que devuelve un puntero a los componentes del cuaternión
+    * @brief Method that returns a pointer to the quaternion components
     */
   float*
-    data() {
+  data() {
     return &w;
   }
 
   /**
-    * @brief Método constante con un puntero a los componentes del cuaternión sin modificarlos
+    * @brief Const method that returns a pointer to the quaternion components without modifying them
     */
   const float*
-    data() const {
+  data() const {
     return &w;
   }
 

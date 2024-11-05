@@ -1,12 +1,12 @@
 #pragma once
 
-// Constantes 
+// Constants 
 const float PI = 3.14159265358979323846f;
 const float E = 2.71828182845904523536f;
 
 /*
-  * @brief Se calcula el valor absoluto
-  * @param num Valor del que se calcula el número absoluto
+  * @brief Calculates the absolute value
+  * @param num Value for which the absolute value is calculated
   */
 float
 abs(float num) {
@@ -17,28 +17,29 @@ abs(float num) {
 }
 
 /*
-  * @brief Se calcula la raiz cuadrada (aproximación) mediante el método de Newthon
-  * @param num Valor del que se calcula la raiz cuadrada
+  * @brief Calculates the square root (approximation) using the Newton method
+  * @param num Value for which the square root is calculated
   */
 float
 sqrtNewthon(int num) {
-  float errMargin = 0.0001; //Margen permitido de error
-  float estimate = 1.0; // Primera estimación
-  // Se irá calculando hasta que la estimación sea cercana a la raíz cuadrada del número
+  float errMargin = 0.0001; //Allowed error margin
+  float estimate = 1.0; // Initial estimate
+  // Continues calculating until the estimate is close to the square root of the number
   while (abs((estimate * estimate) - num) >= errMargin) {
-    float quotient = num / estimate; // Cociente entre el número y la estimación actual
-    float prom = (quotient + estimate) / 2.0; // Cálculo para el valor de estimación
+    float quotient = num / estimate; // Quotient of the number and the current estimate
+    float prom = (quotient + estimate) / 2.0; // Calculation for the estimate value
     estimate = prom;
   }
   return estimate;
 }
 
 /*
-  * @brief Se calcula la raiz cuadrada mediante el método de Newthon-Raphson
-  * @param num Valor del que se calcula la raiz cuadrada
+  * @brief Calculates the square root using the Newton-Raphson method
+  * @param num Value for which the square root is calculated
   */
-inline float sqrt(float value) {
-  // No se permiten valores negativos
+inline float 
+sqrt(float value) {
+  // Negative values are not allowed
   if (value < 0) {
     return 0;
   }
@@ -53,10 +54,11 @@ inline float sqrt(float value) {
 }
 
 /**
-   * Calcula el seno de un ángulo en radianes mediante serie de Taylor
-   * @param angle Ángulo en radianes.
+   * Calculates the sine of an angle in radians using the Taylor series
+   * @param angle Angle in radians.
    */
-inline float sin(float angle) {
+inline float 
+sin(float angle) {
   float result = 0.0f;
   float term = angle;
   float angle_squared = angle * angle;
@@ -70,12 +72,13 @@ inline float sin(float angle) {
 }
 
 /**
-   * Calcula el coseno de un ángulo en radianes mediante serie de Taylor.
-   * @param angle Ángulo en radianes.
+   * Calculates the cosine of an angle in radians using the Taylor series
+   * @param angle Angle in radians.
    */
-inline float cos(float angle) {
+inline float 
+cos(float angle) {
   float result = 1.0f;
-  float term = 1.0f; 
+  float term = 1.0f;
   float angle_squared = angle * angle;
   int n = 1;
   while (term > 1e-6f || term < -1e-6f) {
@@ -87,11 +90,12 @@ inline float cos(float angle) {
 }
 
 /**
-   * Calcula la tangente de un ángulo en radianes y se comprueba que no se divida
-   * entre 0 usando un operador ternario (condicion ? valor_true : valor_false)
-   * @param angle Ángulo en radianes.
+   * Calculates the tangent of an angle in radians, ensuring no division
+   * by zero using a ternary operator (condition ? value_true : value_false)
+   * @param angle Angle in radians.
    */
-inline float tan(float angle) {
+inline float 
+tan(float angle) {
   float tSin = sin(angle);
   float tCos = cos(angle);
   return tCos != 0.0f ? tSin / tCos : 0.0f;

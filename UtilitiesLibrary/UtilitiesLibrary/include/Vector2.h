@@ -4,21 +4,21 @@
 class
 Vector2 {
 public:
-  float x; // Valor en x del vector
-  float y; // Valor en y del vector
+  float x; // X value of the vector
+  float y; // Y value of the vector
 
   /**
-    * @brief Constructor por defecto que inicializa los valores "x" y "y" en 0
+    * @brief Default constructor that initializes "x" and "y" to 0
     */
   Vector2() : x(0), y(0) {};
 
   /**
-    * @brief Constructor con parámetros para los valores "x" y "y"
+    * @brief Constructor with parameters for "x" and "y" values
     */
   Vector2(float xNum, float yNum) : x(xNum), y(yNum) {}
 
   /**
-    * @brief Destructor por defecto
+    * @brief Default destructor
     */
   ~Vector2() = default;
 
@@ -34,19 +34,19 @@ public:
    */
 
    /**
-     * @brief Sobrecarga del operador +, para sumar un vector a otro vector.
-     * @param other El otro vector que se sumará.
+     * @brief  Overload of the + operator, to add one vector to another vector.
+     * @param other The other vector to add.
      */
   Vector2
-   operator+(const Vector2& other) const {
+  operator+(const Vector2& other) const {
     float new_xNum = x + other.x;
     float new_yNum = y + other.y;
     return Vector2(new_xNum, new_yNum);
   }
 
   /**
-     * @brief Sobrecarga del operador -, para restar un vector a otro vector.
-     * @param other El otro vector que se restará.
+     * @brief Overload of the - operator, to subtract one vector from another vector.
+     * @param other The other vector to add.
      */
   Vector2
   operator-(const Vector2& other) const {
@@ -56,8 +56,8 @@ public:
   }
 
   /**
-     * @brief Sobrecarga del operador *, para multiplicar un vector a otro vector.
-     * @param scalar El producto escalar por el que se multiplicará.
+     * @brief Overload of the * operator, to multiply a vector by a scalar.
+     * @param scalar The scalar by which to multiply.
      */
   Vector2
   operator*(float scalar) const {
@@ -65,7 +65,7 @@ public:
   }
 
   /**
-    * @brief Se cacula la magnitud de los valores del vector
+    * @brief Calculates the magnitude of the vector values
     */
   float
   magnitude() {
@@ -73,12 +73,12 @@ public:
   }
 
   /**
-     * @brief Normalización del vector que devuelva un vector con la misma dirección
+     * @brief Normalizes the vector, returning a vector with the same direction
      */
   Vector2
   normalize() {
     float mag = magnitude();
-    // Si la magnitud es 0, se devuelve un vector con las coordenadas (0,0)
+    // If the magnitude is 0, a vector with the coordinates (0,0) is returned
     if (mag == 0) {
       return Vector2(0, 0);
     }
@@ -86,7 +86,7 @@ public:
   }
 
   /**
-    * @brief Método que devuelve un puntero a los componentes del vector
+    * @brief Method that returns a pointer to the vector components
     */
   float*
   data() {
@@ -94,7 +94,7 @@ public:
   }
 
   /**
-    * @brief Método constante con un puntero a los componentes del vector sin modificarlos
+    * @brief Constant method that returns a pointer to the vector components without modifying them
     */
   const float*
   data() const {
