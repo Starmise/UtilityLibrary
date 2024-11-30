@@ -8,7 +8,7 @@ const float E = 2.71828182845904523536f;
   * @brief Calculates the absolute value
   * @param num Value for which the absolute value is calculated
   */
-float
+inline float
 abs(float num) {
   if (num < 0) {
     return num * -1;
@@ -20,7 +20,7 @@ abs(float num) {
   * @brief Calculates the square root (approximation) using the Newton method
   * @param num Value for which the square root is calculated
   */
-float
+inline float
 sqrtNewthon(int num) {
   float errMargin = 0.0001; //Allowed error margin
   float estimate = 1.0; // Initial estimate
